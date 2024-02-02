@@ -15,7 +15,9 @@ class PelangganController extends Controller
             ->join('cities', 'cities.city_id', '=', 'alamat.cities_id')
             ->join('provinces', 'provinces.province_id', '=', 'cities.province_id')
             ->select('users.*', 'alamat.detail', 'cities.title as kota', 'provinces.title as prov')
-            ->where('users.role', '=', 'customer')->get();
+            ->where('users.role', '=', 'customer')->groupBy('users.id')->get();
+
+            // dd($pelanggan);
 
         return view('admin.pelanggan.index', compact('pelanggan'));
     }

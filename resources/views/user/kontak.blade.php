@@ -1,14 +1,24 @@
 @extends('user.app')
 @section('content')
 
-<div class="bg-light py-3">
+<div class="breadcrumb-main mb-3">
     <div class="container">
-    <div class="row">
-        <div class="col-md-12 mb-0"><a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Contact</strong></div>
+        <div class="row">
+            <div class="col">
+                <div class="breadcrumb-contain">
+                    <div>
+                        <h2>Kontak</h2>
+                        <ul>
+                            <li><a href="javascript:void(0)">Home</a></li>
+                            <li><i class="fa fa-angle-double-right"></i></li>
+                            <li><a href="javascript:void(0)">Kontak</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    </div>
-</div>  
-
+</div>
 <div class="site-section">
     <div class="container">
     <div class="row">

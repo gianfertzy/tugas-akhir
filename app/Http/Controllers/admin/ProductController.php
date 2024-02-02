@@ -4,8 +4,9 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Product;
-use App\Categories;
+use App\Models\Product;
+use App\Models\Categories;
+use App\Models\Merk;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
@@ -25,15 +26,19 @@ class ProductController extends Controller
         //menampilkan form tambah kategori
 
         $categories = Categories::all();
+        $merks = Merk::all();
 
-        return view('admin.product.tambah', compact('categories'));
+        return view('admin.product.tambah', compact('categories', 'merks'));
     }
 
     public function store(Request $request)
     {
         if ($request->file('image')) {
+
             //simpan foto produk yang di upload ke direkteri public/storage/imageproduct
-            $file = $request->file('image')->store('imageproduct', 'public');
+            $file = $request->file('image')->store('/imageproduct', 'public');
+            // $request->image->move(public_path('storage'), $file);
+            // dd($file);
 
             Product::create([
                 'name'          => $request->name,
@@ -42,6 +47,7 @@ class ProductController extends Controller
                 'stok'          => $request->stok,
                 'weigth'        => $request->weigth,
                 'categories_id' => $request->categories_id,
+                'merk_id'       => $request->merk_id,
                 'image'         => $file
 
             ]);
@@ -57,7 +63,8 @@ class ProductController extends Controller
 
         return view('admin.product.edit', [
             'product'       => $id,
-            'categories'    => Categories::all(),
+            'categories'    => Categories::get(),
+            'merks'         => Merk::get(),
         ]);
     }
 
@@ -78,6 +85,7 @@ class ProductController extends Controller
         $prod->weigth = $request->weigth;
         $prod->categories_id = $request->categories_id;
         $prod->stok = $request->stok;
+        $prod->merk_id = $request->merk_id;
 
 
         $prod->save();

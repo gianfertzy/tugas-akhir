@@ -22,49 +22,63 @@
                       <div class="col">
                       <h4 class="card-title">Edit Produk</h4>
                       </div>
-                      <div class="col text-right">
-                      <a href="javascript:void(0)" onclick="window.history.back()" class="btn btn-primary">Kembali</a>
-                      </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <form action="{{ route('admin.product.update',['id' => $product->id]) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
-                                <div class="form-group">
-                                <label for="exampleInputUsername1">Nama Produk</label>
-                                <input required type="text" class="form-control" name="name" value="{{ $product->name }}">
+                                <div class="form-floating mt-1">
+                                  <input type="text" class="form-control" required name="name" value="{{$product->name}}" id="firstnamefloatingInput" placeholder="Nama Produk">
+                                  <label for="firstnamefloatingInput">Nama Produk</label>
                                 </div>
-                                <div class="form-group">
-                                    <label for="exampleFormControlSelect2">Pilih Kategori</label>
-                                    <select class="form-control" name="categories_id" id="exampleFormControlSelect2">
-                                    @foreach($categories as $categorie)
-                                        <option value="{{ $categorie->id }}" <?php if($product->categories_id == $categorie->id){ echo 'selected';} ?>>{{ $categorie->name }}</option>
+                                <div class="form-floating mt-1">
+                                  <select class="form-control" class="form-control" id="firstnamefloatingInput1" placeholder="Nama Kategori" required name="categories_id" value="{{$product->categories_id}}"
+                                    id="exampleFormControlSelect2">
+                                    @foreach ($categories as $categorie)
+                                      <option value="{{ $categorie->id }}">{{ $categorie->name }}</option>
                                     @endforeach
-                                    </select>
+                                  </select>
+                                  <label for="firstnamefloatingInput1">Pilih Merk</label>
                                 </div>
-                                <div class="form-group">
-                                <label for="exampleInputUsername1">Berat (gram)</label>
-                                <input required type="number" class="form-control" name="weigth" value="{{ $product->weigth}}">
+                                <div class="form-floating mt-1">
+                                  <select class="form-control" class="form-control" id="firstnamefloatingInput1" placeholder="Nama Merk" required name="merk_id" value="{{$product->merk_id}}"
+                                    id="exampleFormControlSelect2">
+                                    @foreach ($merks as $merk)
+                                      <option value="{{ $merk->id }}">{{ $merk->name }}</option>
+                                    @endforeach
+                                  </select>
+                                  <label for="firstnamefloatingInput1">Pilih Merk</label>
                                 </div>
-                                <div class="form-group">
-                                <label for="exampleInputUsername1">Harga</label>
-                                <input required type="number" class="form-control" name="price" value="{{ $product->price}}">
+              
+                                <div class="form-floating mt-1">
+                                  <input type="number" class="form-control" required name="weigth" value="{{$product->weigth}}" id="firstnamefloatingInput2" placeholder="Berat (gram)">
+                                  <label for="firstnamefloatingInput2">Berat (gram)</label>
                                 </div>
-                                <div class="form-group">
-                                <label for="exampleInputUsername1">Stok</label>
-                                <input required type="number" class="form-control" name="stok" value="{{ $product->stok}}">
+              
+                                <div class="form-floating mt-1">
+                                  <input type="number" class="form-control" required name="price" value="{{$product->price}}" id="firstnamefloatingInput3" placeholder="Harga">
+                                  <label for="firstnamefloatingInput3">Harga</label>
                                 </div>
-                                <div class="form-group">
-                                    <label>File upload</label>
-                                    <input type="file" name="image" class="form-control">
-                                    <small>kosongkan jika tidak mengubah gambar</small>
+              
+                                <div class="form-floating mt-1">
+                                  <input type="number" class="form-control" required name="stok" value="{{$product->stok}}" id="firstnamefloatingInput4" placeholder="Stok">
+                                  <label for="firstnamefloatingInput4">Stok</label>
                                 </div>
-                                <div class="form-group">
-                                <label for="">Deskripsi</label>
-                                <textarea name="description" id="" cols="30" rows="10" class="form-control" required>{{ $product->description }}</textarea>
+                                
+                                <div class="form-floating mt-1">
+                                  <textarea name="description" id="" cols="30" rows="10" class="form-control"  id="firstnamefloatingInput5" required>{{$product->description}}</textarea>
+                                  <label for="firstnamefloatingInput5">Deskripsi</label>
                                 </div>
-                                <div class="text-right">
-                                    <button type="submit" class="btn btn-success text-right">Simpan</button>
+                                <div class="form-control mt-1">
+                                  <input type="file" name="image" value="{{$product->image}}" class="form-control">
+                                  <small>kosongkan jika tidak diubah</small>
+                                </div>
+                                <div class="text-right mt-3">
+                                  <button type="submit"
+                                    class="bg-success btn btn-success text-right">Simpan</button>
+                                  <a href="javascript:void(0)" onclick="window.history.back()"
+                                    class="btn btn-primary">Kembali</a>
+              
                                 </div>
                             </form>
                         </div>

@@ -53,6 +53,8 @@
 @endsection
 @section('js')
 <script type="text/javascript">
+
+console.log('oioi');
 var toHtml = (tag, value) => {
 	$(tag).html(value);
 	}
@@ -62,7 +64,7 @@ var toHtml = (tag, value) => {
      $('#province_id').on('change',function(){
      var id = $('#province_id').val();
      var url = window.location.href;
-     var urlNya = url.substring(0, url.lastIndexOf('/ubahalamat/'));   
+     var urlNya = url.substring(0, url.lastIndexOf('/ubahalamat/'));
      $.ajax({
          type:'GET',
          url:urlNya + '/alamat/getcity/' + id,

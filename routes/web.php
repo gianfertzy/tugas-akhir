@@ -26,7 +26,7 @@ Route::get('/pelanggan',function(){
     return 'Pelanggan';
 });
 
-Route::group(['middleware' => ['auth','checkRole:admin']],function(){    
+Route::group(['middleware' => ['auth','checkRole:admin']],function(){
     Route::get('/admin','DashboardController@index')->name('admin.dashboard');
     Route::get('/pengaturan/alamat','admin\PengaturanController@aturalamat')->name('admin.pengaturan.alamat');
     Route::get('/pengaturan/ubahalamat/{id}','admin\PengaturanController@ubahalamat')->name('admin.pengaturan.ubahalamat');
@@ -34,12 +34,22 @@ Route::group(['middleware' => ['auth','checkRole:admin']],function(){
     Route::post('pengaturan/simpanalamat','admin\PengaturanController@simpanalamat')->name('admin.pengaturan.simpanalamat');
     Route::post('pengaturan/updatealamat/{id}','admin\PengaturanController@updatealamat')->name('admin.pengaturan.updatealamat');
 
+    Route::get('pengaturan/user','admin\PengaturanController@user')->name('admin.user');
+    Route::post('pengaturan/user/update','admin\PengaturanController@updateUser')->name('admin.pengaturan.updateuser');
+
     Route::get('/admin/categories','admin\CategoriesController@index')->name('admin.categories');
     Route::get('/admin/categories/tambah','admin\CategoriesController@tambah')->name('admin.categories.tambah');
     Route::post('/admin/categories/store','admin\CategoriesController@store')->name('admin.categories.store');
     Route::post('/admin/categories/update/{id}','admin\CategoriesController@update')->name('admin.categories.update');
     Route::get('/admin/categories/edit/{id}','admin\CategoriesController@edit')->name('admin.categories.edit');
     Route::get('/admin/categories/delete/{id}','admin\CategoriesController@delete')->name('admin.categories.delete');
+
+    Route::get('/admin/merk','admin\MerkController@index')->name('admin.merk');
+    Route::get('/admin/merk/tambah','admin\MerkController@tambah')->name('admin.merk.tambah');
+    Route::post('/admin/merk/store','admin\MerkController@store')->name('admin.merk.store');
+    Route::post('/admin/merk/update/{id}','admin\MerkController@update')->name('admin.merk.update');
+    Route::get('/admin/merk/edit/{id}','admin\MerkController@edit')->name('admin.merk.edit');
+    Route::get('/admin/merk/delete/{id}','admin\MerkController@delete')->name('admin.merk.delete');
 
     Route::get('/admin/product','admin\ProductController@index')->name('admin.product');
     Route::get('/admin/product/tambah','admin\ProductController@tambah')->name('admin.product.tambah');
@@ -74,6 +84,7 @@ Route::group(['middleware' => ['auth','checkRole:customer']],function(){
     Route::post('/keranjang/update','user\KeranjangController@update')->name('user.keranjang.update');
     Route::get('/keranjang/delete/{id}','user\KeranjangController@delete')->name('user.keranjang.delete');
     Route::get('/alamat','user\AlamatController@index')->name('user.alamat');
+    Route::get('/alamat/{id}/hapus','user\AlamatController@hapus')->name('user.alamat.hapus');
     Route::get('/getcity/{id}','user\AlamatController@getCity')->name('user.alamat.getCity');
     Route::post('/alamat/simpan','user\AlamatController@simpan')->name('user.alamat.simpan');
     Route::post('/alamat/update/{id}','user\AlamatController@update')->name('user.alamat.update');
@@ -87,6 +98,9 @@ Route::group(['middleware' => ['auth','checkRole:customer']],function(){
     Route::get('/order/pesanandibatalkan/{id}','user\OrderController@pesanandibatalkan')->name('user.order.pesanandibatalkan');
     Route::get('/order/pembayaran/{id}','user\OrderController@pembayaran')->name('user.order.pembayaran');
     Route::post('/order/kirimbukti/{id}','user\OrderController@kirimbukti')->name('user.order.kirimbukti');
+
+    Route::get('/user/detail','PengaturanController@user')->name('user.index');
+    Route::post('user/update','PengaturanController@updateUser')->name('user.updateuser');
 });
 
 Route::get('/ongkir', 'OngkirController@index');

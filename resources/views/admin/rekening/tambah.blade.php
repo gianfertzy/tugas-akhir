@@ -31,7 +31,7 @@
                             <form action="{{ route('admin.rekening.store') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
-                                <label for="exampleInputUsername1">Nama Bank</label>
+                                <label for="exampleInputUsername1">Rekening</label>
                                 <input type="text" class="form-control" name="bank_name">
                                 </div>
                                 <div class="form-group">
@@ -42,7 +42,7 @@
                                 <label for="exampleInputUsername1">No Rekening</label>
                                 <input type="number" class="form-control" name="no_rekening">
                                 </div>
-                                <div class="text-right">
+                                <div class="mt-2 text-right">
                                     <button type="submit" class="btn btn-success text-right">Simpan</button>
                                 </div>
                             </form>

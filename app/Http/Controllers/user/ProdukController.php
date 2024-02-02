@@ -4,31 +4,37 @@ namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Product;
-use App\Categories;
+use App\Models\Product;
+use App\Models\Categories;
+use App\Models\Merk;
 use Illuminate\Support\Facades\DB;
 
 class ProdukController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         //menampilkan data produk yang dijoin dengan table kategori
         //kemudian dikasih paginasi 9 data per halaman nya
-        $kat = Categories::join('products', 'products.categories_id', '=', 'categories.id')
-            ->select(DB::raw('count(products.categories_id) as jumlah, categories.*'))
+        $kat = Categories::with('produks')->withCount('produks')
             ->groupBy('categories.id')
             ->get();
 
+
+        $merks = Merk::withCount('produks')->get();
+        $product = Product::get();
+
+
         return view('user.produk', [
-            'produks' => Product::paginate(9),
-            'categories' => $kat
+            'categories' => $kat,
+            'merks' => $merks,
+            'products' => $product
         ]);
     }
     public function detail($id)
     {
         //mengambil detail produk
         return view('user.produkdetail', [
-            'produk' => Product::findOrFail($id)
+            'produk' => Product::with('merk')->findOrFail($id)
         ]);
     }
 

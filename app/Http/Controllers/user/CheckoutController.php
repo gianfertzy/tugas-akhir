@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\user;
 
-use App\Alamat;
+use App\Models\Alamat;
 use App\Http\Controllers\Controller;
-use App\Keranjang;
+use App\Models\Keranjang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -35,15 +35,21 @@ class CheckoutController extends Controller
 
         //ambil id kota toko
         $alamat_toko = DB::table('alamat_toko')->first();
-
         //lalu hitung ongkirnya
-        $cost = RajaOngkir::ongkosKirim([
-            'origin'        => $alamat_toko->id,
-            'destination'   => $city_destination,
-            'weight'        => $berattotal,
-            'courier'       => 'jne'
-        ])
-        ->get();
+
+        try {
+
+            
+            $cost = RajaOngkir::ongkosKirim([
+                'origin'        => $alamat_toko->id,
+                'destination'   => $city_destination,
+                'weight'        => $berattotal/100,
+                'courier'       => 'jne'
+                ])
+                ->get();
+        } catch (Exception $e){
+            dd($e);
+        }
 
         //ambil hasil nya
         $ongkir =  $cost[0]['costs'][0]['cost'][0]['value'];

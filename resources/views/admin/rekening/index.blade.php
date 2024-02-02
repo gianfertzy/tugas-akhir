@@ -31,7 +31,7 @@
                         <thead>
                           <tr>
                             <th width="5%">No</th>
-                            <th>Nama Bank</th>
+                            <th>Rekening</th>
                             <th>Atas Nama</th>
                             <th>No Rekening</th>
                             <th width="15%">Aksi</th>
@@ -40,7 +40,7 @@
                         <tbody>
                           @foreach($rekening as $rek)
                             <tr>
-                                <td align="center"></td>
+                                <td align="center">{{$loop->iteration}}</td>
                                 <td>{{ $rek->bank_name }}</td>
                                 <td>{{ $rek->atas_nama }}</td>
                                 <td>{{ $rek->no_rekening }}</td>

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Order;
-use App\User;
+use App\Models\Order;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
@@ -19,6 +20,9 @@ class DashboardController extends Controller
         $pendapatan = Order::select(DB::raw('SUM(subtotal) as penghasilan'))
             ->where('status_order_id', 5)
             ->first();
+        $ongkir = Order::select(DB::raw('SUM(ongkir) as ongkir'))
+            ->where('status_order_id', 5)
+            ->first();
         $transaksi = Order::select(DB::raw('COUNT(id) as total_order'))
             ->first();
         $pelanggan = User::select(DB::raw('COUNT(id) as total_user'))
@@ -29,6 +33,9 @@ class DashboardController extends Controller
             ->select('order.*', 'status_order.name', 'users.name as nama_pemesan')
             ->limit(10)
             ->get();
+
+
+            $pendapatan->penghasilan -= $ongkir->ongkir;
 
         return view('admin/dashboard', [
             'pendapatan' => $pendapatan,

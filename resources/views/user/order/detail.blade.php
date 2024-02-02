@@ -1,12 +1,26 @@
 @extends('user.app')
 @section('content')
-<div class="bg-light py-3">
-    <div class="container">
-    <div class="row">
-        <div class="col-md-12 mb-0"><a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Cart</strong></div>
-    </div>
-    </div>
-</div>
+
+<main>
+    <section class="breadcrumb-area">
+        <div class="container">
+            <div class="radios-breadcrumb breadcrumbs">
+                <ul class="list-unstyled d-flex align-items-center">
+                    <li class="radiosbcrumb-item radiosbcrumb-begin">
+                        <a href="index.html"><span>Home</span></a>
+                    </li>
+                    <li class="radiosbcrumb-item radiosbcrumb">
+                        <span>Order</span>
+                    </li>
+                    <li class="radiosbcrumb-item radiosbcrumb-end">
+                        <span>Detail</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section>
 
 <div class="site-section">
     <div class="container">
@@ -17,7 +31,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="card">  
+            <div class="card">
                 <div class="card-body">
                 <div class="row">
                 <div class="col-md-8">
@@ -30,7 +44,7 @@
                         <tr>
                             <th>No Resi</th>
                             <td>:</td>
-                            <td>{{ $order->no_resi }}</td>
+                            <td>{{ $order->no_resi ?? "Belum diinput" }}</td>
                         </tr>
                         <tr>
                             <th>Status Pesanan</th>
@@ -47,6 +61,11 @@
                                 COD
                             @endif
                             </td>
+                        </tr>
+                        <tr>
+                            <th>Ongkir</th>
+                            <td>:</td>
+                            <td>Rp. {{ number_format($order->ongkir,2,',','.') }}</td>
                         </tr>
                         <tr>
                             <th>Total Pembayaran</th>
@@ -76,22 +95,26 @@
                         <tbody>
                             @foreach($detail as $o)
                             <tr>
-                                <td><img src="{{ asset('storage/'.$o->image) }}" alt="" srcset="" width="50"></td>
+                                <td><img src="{{ asset($o->image) }}" alt="" srcset="" width="50"></td>
                                 <td>{{ $o->nama_produk }}</td>
                                 <td>{{ $o->qty }}</td>
-                                <td>{{ $o->qty * $o->price }}</td>
+                                <td>{{ number_format($o->qty * $o->price) }}</td>
                             </tr>
                             @endforeach
                         </tbody>
                         </table>
-                    
+
                 </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
 
     </div>
 </div>
+    </section>
+</main>
+
+
 @endsection

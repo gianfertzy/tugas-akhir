@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\Detailorder;
+use App\Models\Detailorder;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Order;
-use App\Product;
+use App\Models\Order;
+use App\Models\Product;
 
 class TransaksiController extends Controller
 {
@@ -128,6 +128,6 @@ class TransaksiController extends Controller
                 'status_order_id'   => 4
             ]);
 
-        return redirect()->route('admin.transaksi.perludikirim')->with('status', 'Berhasil Menginput No Resi');
+        return redirect()->route('admin.transaksi.dikirim')->with('status', 'Berhasil Menginput No Resi');
     }
 }

@@ -4,9 +4,9 @@ namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Province;
-use App\City;
-use App\Alamat;
+use App\Models\Province;
+use App\Models\City;
+use App\Models\Alamat;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -29,6 +29,8 @@ class AlamatController extends Controller
                 ->where('alamat.user_id', $id_user)
                 ->get();
             }
+
+            $data['check'] = $cekAlamat;
 
         //jika belum maka tampilkan form untuk mengatur alamat
         return view('user.alamat', $data);
@@ -71,4 +73,13 @@ class AlamatController extends Controller
 
         return redirect()->route('user.alamat');
     }
+
+    public function hapus($id)
+    {
+        //menyimpan alamat user
+        Alamat::find($id)->delete();
+
+        return redirect()->route('user.alamat');
+    }
+
 }

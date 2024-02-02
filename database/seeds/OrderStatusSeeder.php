@@ -1,7 +1,8 @@
 <?php
 
+use App\Models\Orderstatus;
 use Illuminate\Database\Seeder;
-use App\Orderstatus;
+
 class OrderStatusSeeder extends Seeder
 {
     /**

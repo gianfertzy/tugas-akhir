@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Categories;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
-use App\Categories;
 
 class CategoriesController extends Controller
 {
@@ -27,7 +27,7 @@ class CategoriesController extends Controller
 
     public function store(Request $request)
     {
-        //Simpan datab ke database    
+        //Simpan datab ke database
         Categories::updateOrCreate([
             'name' => $request->name
         ], []);

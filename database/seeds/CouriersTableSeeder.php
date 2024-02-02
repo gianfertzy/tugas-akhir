@@ -1,7 +1,7 @@
 <?php
 
+use App\Models\Courier;
 use Illuminate\Database\Seeder;
-use App\Courier;
 class CouriersTableSeeder extends Seeder
 {
     /**

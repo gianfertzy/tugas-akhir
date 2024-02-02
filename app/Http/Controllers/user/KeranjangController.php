@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\user;
 
-use App\Alamat;
+use App\Models\Alamat;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Keranjang;
+use App\Models\Keranjang;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -32,11 +32,19 @@ class KeranjangController extends Controller
 
     public function simpan(Request $request)
     {
-        Keranjang::create([
-            'user_id' => $request->user_id,
-            'products_id' => $request->products_id,
-            'qty' => $request->qty
-        ]);
+
+        $check = Keranjang::where('user_id', Auth::user()->id)->where('products_id', $request->products_id)->first();
+
+        if(empty($check)){
+            Keranjang::create([
+                'user_id' => Auth::user()->id,
+                'products_id' => $request->products_id,
+                'qty' => $request->qty
+            ]);
+        }else{
+            $qty = $request->qty+$check->qty;
+            $check->update(['qty' => $qty]);
+        }
 
         return redirect()->route('user.keranjang');
     }

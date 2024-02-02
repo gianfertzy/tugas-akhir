@@ -32,7 +32,8 @@ class RouteServiceProvider extends ServiceProvider
      * root path for index and non-login users
      */
     public const ROOT = '/';
-
+    
+    public const LOGIN = '/login';
     /**
      * Define your route model bindings, pattern filters, etc.
      *

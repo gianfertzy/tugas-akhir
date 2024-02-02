@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Keranjang extends Model
+{
+    protected $table = 'keranjang';
+    protected $fillable = ['user_id','products_id','qty'];
+
+
+    function produk() {
+        return $this->belongsTo(Product::class, 'products_id');
+    }
+}

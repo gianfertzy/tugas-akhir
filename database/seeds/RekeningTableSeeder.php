@@ -1,7 +1,8 @@
 <?php
 
+use App\Models\Rekening;
 use Illuminate\Database\Seeder;
-use App\Rekening;
+
 class RekeningTableSeeder extends Seeder
 {
     /**
@@ -12,7 +13,7 @@ class RekeningTableSeeder extends Seeder
     public function run()
     {
         $data = [
-            ['bank_name' => 'BRI','atas_nama'=>'FIKRI SUHERI','no_rekening'=>'123123']
+            ['bank_name' => 'BRI','atas_nama'=>'Toko HP','no_rekening'=>'123123']
         ];
         Rekening::insert($data);
     }

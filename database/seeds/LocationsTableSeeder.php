@@ -1,9 +1,10 @@
 <?php
 
+use App\Models\City;
+use App\Models\Province;
 use Illuminate\Database\Seeder;
 use Kavist\RajaOngkir\Facades\RajaOngkir;
-use App\Province;
-use App\City;
+
 class LocationsTableSeeder extends Seeder
 {
     /**

@@ -4,10 +4,10 @@ namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Order;
-use App\Detailorder;
-use App\Keranjang;
-use App\Rekening;
+use App\Models\Order;
+use App\Models\Detailorder;
+use App\Models\Keranjang;
+use App\Models\Rekening;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
@@ -161,7 +161,7 @@ class OrderController extends Controller
             }
             //lalu hapus data produk pada keranjang pembeli
             Keranjang::where('user_id', $userid)->delete();
-
+            
             return redirect()->route('user.order.sukses');
         }
 

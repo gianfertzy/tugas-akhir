@@ -4,24 +4,13 @@
             <div class="page-header">
               <h3 class="page-title">
                 <span class="page-title-icon bg-gradient-primary text-white mr-2">
-                  <i class="mdi mdi-home"></i>
                 </span> Kategori </h3>
-              <nav aria-label="breadcrumb">
-                <ul class="breadcrumb">
-                  <li class="breadcrumb-item active" aria-current="page">
-                    <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
-                  </li>
-                </ul>
-              </nav>
             </div>
             <div class="row">
               <div class="col-12 grid-margin">
                 <div class="card">
                   <div class="card-body">
                     <div class="row mb-3">
-                      <div class="col">
-                      <h4 class="card-title">Data Kategori</h4>
-                      </div>
                       <div class="col text-right">
                       <a href="{{ route('admin.categories.tambah') }}" class="btn btn-primary">Tambah</a>
                       </div>
@@ -38,14 +27,14 @@
                         <tbody>
                           @foreach($categories as $categorie)
                             <tr>
-                                <td align="center"></td>
+                                <td align="center">{{$loop->iteration}}</td>
                                 <td>{{ $categorie->name }}</td>
                                 <td align="center">
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                  <a href="{{ route('admin.categories.edit',['id'=>$categorie->id]) }}" class="btn btn-warning btn-sm">
+                                  <a href="{{ route('admin.categories.edit',['id'=>$categorie->id]) }}" class="btn btn-warning btn  me-1">
                                     <i class="mdi mdi-tooltip-edit"></i>
                                   </a>
-                                  <a href="{{ route('admin.categories.delete',['id'=>$categorie->id]) }}" onclick="return confirm('Yakin Hapus data')" class="btn btn-danger btn-sm">
+                                  <a href="{{ route('admin.categories.delete',['id'=>$categorie->id]) }}" onclick="return confirm('Yakin Hapus data')" class="btn btn-danger btn">
                                     <i class="mdi mdi-delete-forever"></i>
                                   </a>
                                 </div>
